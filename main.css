@@ -2113,7 +2113,12 @@ body.dark .design-tile:nth-child(6) .design-art {
     display: none;
   }
 
-  /* ===== 2026 EDITORIAL REDESIGN ===== */
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+/* ===== 2026 EDITORIAL REDESIGN ===== */
   :root {
     --bg: #0c0d0f;
     --bg-soft: #15171a;
@@ -2258,8 +2263,3 @@ body.dark .design-tile:nth-child(6) .design-art {
     .hero-img { max-width: 100%; }
     .signal-track { justify-content: flex-start; animation-duration: 16s; }
   }
-
-  section {
-    page-break-inside: avoid;
-  }
-}
