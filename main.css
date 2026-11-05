@@ -5,6 +5,91 @@
   box-sizing: border-box;
 }
 
+/* ===== THEME CONTRAST GUARANTEES ===== */
+body.dark {
+color: #f4f1e8;
+}
+
+body.dark .nav-links a,
+body.dark .hero-content h1,
+body.dark .timeline-description,
+body.dark .journey-panel p,
+body.dark .form-group label,
+body.dark .info-item,
+body.dark .footer-section h4 {
+color: #f4f1e8;
+}
+
+body.dark .navbar .nav-links a {
+color: #f4f1e8 !important;
+}
+
+body.dark .section-subtitle,
+body.dark .about-text p,
+body.dark .hero-description,
+body.dark .project-description,
+body.dark .skill-card p,
+body.dark .contact-item p,
+body.dark .timeline-company,
+body.dark .timeline-highlights li,
+body.dark .testimonial-text,
+body.dark .footer-section p,
+body.dark .footer-section a {
+color: #d7d9d4;
+}
+
+body:not(.dark) {
+color: #17191c;
+}
+
+body:not(.dark) .navbar,
+body:not(.dark) .nav-links a,
+body:not(.dark) .hero-content h1,
+body:not(.dark) .timeline-description,
+body:not(.dark) .journey-panel p,
+body:not(.dark) .form-group label,
+body:not(.dark) .info-item {
+color: #17191c;
+}
+
+body:not(.dark) .section-subtitle,
+body:not(.dark) .about-text p,
+body:not(.dark) .hero-description,
+body:not(.dark) .project-description,
+body:not(.dark) .skill-card p,
+body:not(.dark) .contact-item p,
+body:not(.dark) .timeline-company,
+body:not(.dark) .timeline-highlights li,
+body:not(.dark) .testimonial-text,
+body:not(.dark) .footer-section p,
+body:not(.dark) .footer-section ul,
+body:not(.dark) .footer-section a {
+color: #3f454b;
+}
+
+body:not(.dark) .footer-section h4,
+body:not(.dark) .footer-bottom {
+color: #17191c;
+}
+
+body:not(.dark) .logo {
+filter: brightness(0);
+}
+
+body:not(.dark) .form-group input,
+body:not(.dark) .form-group textarea,
+body:not(.dark) .newsletter-form input {
+color: #17191c;
+background: #fffdf8;
+border-color: rgba(23, 25, 28, 0.24);
+}
+
+body:not(.dark) .form-group input::placeholder,
+body:not(.dark) .form-group textarea::placeholder,
+body:not(.dark) .newsletter-form input::placeholder {
+color: #60676e;
+}
+
 :root {
   --bg: #f6f1ea;
   --bg-soft: #efe7dd;
