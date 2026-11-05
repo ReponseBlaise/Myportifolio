@@ -1,27 +1,3 @@
-// ===== DARK MODE TOGGLE =====
-const modeToggle = document.getElementById('modeToggle');
-const body = document.body;
-
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-if (currentTheme === 'dark' && modeToggle) {
-  body.classList.add('dark');
-  modeToggle.textContent = '☀️';
-}
-
-if (modeToggle) {
-  modeToggle.setAttribute('aria-label', currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-  modeToggle.setAttribute('aria-pressed', currentTheme === 'dark' ? 'true' : 'false');
-  modeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    const isDark = body.classList.contains('dark');
-    modeToggle.textContent = isDark ? '☀️' : '🌙';
-    modeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    modeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
-}
-
 // ===== MOBILE MENU TOGGLE =====
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');

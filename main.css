@@ -2177,6 +2177,60 @@ body.dark .design-tile:nth-child(6) .design-art {
     margin: 0 auto;
     padding: 9vh 4vw 12vh;
     gap: 8vw;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      linear-gradient(90deg, rgba(12, 13, 15, 0.96) 0%, rgba(12, 13, 15, 0.78) 45%, rgba(12, 13, 15, 0.2) 100%),
+      linear-gradient(180deg, rgba(12, 13, 15, 0.1), rgba(12, 13, 15, 0.9)),
+      url("./images/hero.png") center / cover no-repeat;
+    filter: saturate(0.75) contrast(1.1);
+    transform: scale(1.08);
+    animation: backdropDrift 18s ease-in-out infinite alternate;
+  }
+
+  .hero-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 20%, rgba(215, 255, 63, 0.16) 50%, transparent 75%);
+    transform: translateX(-100%);
+    animation: lightSweep 9s ease-in-out infinite;
+  }
+
+  .film-grain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    mix-blend-mode: soft-light;
+    animation: grainShift 0.25s steps(2) infinite;
+  }
+
+  @keyframes backdropDrift {
+    from { transform: scale(1.08) translate3d(-1%, 0, 0); }
+    to { transform: scale(1.16) translate3d(1%, -1%, 0); }
+  }
+
+  @keyframes lightSweep {
+    0%, 45% { transform: translateX(-100%); opacity: 0; }
+    55% { opacity: 1; }
+    75%, 100% { transform: translateX(100%); opacity: 0; }
+  }
+
+  @keyframes grainShift {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(2%, -1%); }
+    50% { transform: translate(-1%, 2%); }
+    75% { transform: translate(1%, 1%); }
+    100% { transform: translate(-2%, -1%); }
   }
 
   .hero-content { flex: 1.1; max-width: 720px; }
@@ -2230,6 +2284,47 @@ body.dark .design-tile:nth-child(6) .design-art {
     border-top: 2px solid #0c0d0f;
     border-bottom: 2px solid #0c0d0f;
   }
+
+  .about,
+  .skills,
+  .design-section,
+  .experience,
+  .journey-section,
+  .projects,
+  .testimonials,
+  .contact {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .about::before,
+  .skills::before,
+  .design-section::before,
+  .experience::before,
+  .journey-section::before,
+  .projects::before,
+  .testimonials::before,
+  .contact::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.13;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    filter: grayscale(1) contrast(1.2);
+  }
+
+  .about::before { background-image: url("./images/portifolio.JPG"); }
+  .skills::before { background-image: url("./images/backend.png"); }
+  .design-section::before { background-image: url("./images/react.png"); }
+  .experience::before { background-image: url("./images/hero.png"); }
+  .journey-section::before { background-image: url("./images/intro-to-web.png"); }
+  .projects::before { background-image: url("./images/backend.png"); }
+  .testimonials::before { background-image: url("./images/portifolio.JPG"); }
+  .contact::before { background-image: url("./images/hero.png"); }
   .signal-track {
     display: flex;
     align-items: center;
@@ -2262,4 +2357,14 @@ body.dark .design-tile:nth-child(6) .design-art {
     .hero-image { width: 82vw; }
     .hero-img { max-width: 100%; }
     .signal-track { justify-content: flex-start; animation-duration: 16s; }
+    .about::before,
+    .skills::before,
+    .design-section::before,
+    .experience::before,
+    .journey-section::before,
+    .projects::before,
+    .testimonials::before,
+    .contact::before {
+      background-attachment: scroll;
+    }
   }
