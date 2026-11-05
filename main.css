@@ -2155,6 +2155,36 @@ body.dark .design-tile:nth-child(6) .design-art {
     --border: rgba(244, 241, 232, 0.14);
   }
 
+  body:not(.dark) {
+    --bg: #f4f0e8;
+    --bg-soft: #e8e1d4;
+    --nav-bg: rgba(244, 240, 232, 0.84);
+    --text: #17191c;
+    --accent: #6d8d00;
+    --accent-light: #91b800;
+    --accent-deep: #526b00;
+    --card: rgba(255, 255, 255, 0.8);
+    --border: rgba(23, 25, 28, 0.14);
+    --shadow: 0 18px 50px rgba(23, 25, 28, 0.12);
+    --shadow-lg: 0 28px 80px rgba(23, 25, 28, 0.2);
+  }
+
+  body:not(.dark) .hero-backdrop {
+    background:
+      linear-gradient(90deg, rgba(244, 240, 232, 0.94) 0%, rgba(244, 240, 232, 0.7) 45%, rgba(244, 240, 232, 0.08) 100%),
+      linear-gradient(180deg, rgba(244, 240, 232, 0.08), rgba(244, 240, 232, 0.62)),
+      url("./images/hero.png") center / cover no-repeat;
+  }
+
+  body:not(.dark) .hero-img {
+    filter: grayscale(0.35) contrast(1.05);
+    box-shadow: 18px 18px 0 rgba(109, 141, 0, 0.18);
+  }
+
+  body:not(.dark) .film-grain {
+    opacity: 0.08;
+  }
+
   .navbar {
     background: var(--nav-bg);
     border-bottom: 1px solid var(--border);
@@ -2169,7 +2199,18 @@ body.dark .design-tile:nth-child(6) .design-art {
   .logo { width: 170px; filter: brightness(0) invert(1); }
   .nav-links { gap: 1.4rem; }
   .nav-links a { font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  .mode-btn { border-radius: 50%; width: 42px; height: 42px; padding: 0; background: var(--accent); color: #0c0d0f; }
+  .mode-btn {
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    background: var(--accent);
+    color: #0c0d0f;
+    border: 2px solid currentColor;
+    cursor: pointer;
+    font-size: 1.05rem;
+    flex: 0 0 42px;
+  }
 
   .hero {
     max-width: 1440px;

@@ -1,4 +1,26 @@
 // ===== MOBILE MENU TOGGLE =====
+const modeToggle = document.getElementById('modeToggle');
+const body = document.body;
+const savedTheme = localStorage.getItem('theme') || 'dark';
+
+body.classList.toggle('dark', savedTheme === 'dark');
+if (modeToggle) {
+  const syncThemeButton = () => {
+    const isDark = body.classList.contains('dark');
+    modeToggle.textContent = isDark ? '☀️' : '🌙';
+    modeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    modeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+  };
+
+  syncThemeButton();
+  modeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    syncThemeButton();
+  });
+}
+
+// ===== MOBILE MENU TOGGLE =====
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-links a');
