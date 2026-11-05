@@ -4,41 +4,56 @@ const body = document.body;
 
 // Check for saved theme preference or default to light mode
 const currentTheme = localStorage.getItem('theme') || 'light';
-if (currentTheme === 'dark') {
+if (currentTheme === 'dark' && modeToggle) {
   body.classList.add('dark');
   modeToggle.textContent = '☀️';
 }
 
-modeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  const isDark = body.classList.contains('dark');
-  modeToggle.textContent = isDark ? '☀️' : '🌙';
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
+if (modeToggle) {
+  modeToggle.setAttribute('aria-label', currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  modeToggle.setAttribute('aria-pressed', currentTheme === 'dark' ? 'true' : 'false');
+  modeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const isDark = body.classList.contains('dark');
+    modeToggle.textContent = isDark ? '☀️' : '🌙';
+    modeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    modeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+}
 
 // ===== MOBILE MENU TOGGLE =====
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-links a');
 
-hamburger.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-  hamburger.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-controls', 'navMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+}
 
 // Close menu when a link is clicked
 navLinks.forEach(link => {
   link.addEventListener('click', () => {
-    navMenu.classList.remove('active');
-    hamburger.classList.remove('active');
+    if (navMenu) navMenu.classList.remove('active');
+    if (hamburger) {
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
   });
 });
 
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.nav-container')) {
+  if (navMenu && hamburger && !e.target.closest('.nav-container')) {
     navMenu.classList.remove('active');
     hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
   }
 });
 
@@ -125,7 +140,7 @@ const showError = (fieldId, message) => {
   errorElement.classList.add('show');
 };
 
-contactForm.addEventListener('submit', (e) => {
+if (contactForm) contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   if (validateForm()) {
@@ -194,7 +209,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const projectModal = document.getElementById('projectModal');
 const modalClose = document.querySelector('.modal-close');
 
-if (modalClose) {
+if (projectModal && modalClose) {
   modalClose.addEventListener('click', () => {
     projectModal.style.display = 'none';
   });
@@ -202,7 +217,7 @@ if (modalClose) {
 
 // Close modal when clicking outside
 window.addEventListener('click', (event) => {
-  if (event.target === projectModal) {
+  if (projectModal && event.target === projectModal) {
     projectModal.style.display = 'none';
   }
 });
@@ -255,9 +270,9 @@ displayScrollElement();
 // ===== NAVBAR BACKGROUND ON SCROLL =====
 const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
+  if (navbar && window.scrollY > 50) {
     navbar.style.boxShadow = 'var(--shadow-lg)';
-  } else {
+  } else if (navbar) {
     navbar.style.boxShadow = 'var(--shadow)';
   }
 });
@@ -345,13 +360,16 @@ trackSectionView();
 // ===== HANDLE KEYBOARD NAVIGATION =====
 document.addEventListener('keydown', (e) => {
   // Close mobile menu on Escape key
-  if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+  if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
     navMenu.classList.remove('active');
-    hamburger.classList.remove('active');
+    if (hamburger) {
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
   }
 
   // Tab to first link in menu when menu is open
-  if (e.key === 'Tab' && navMenu.classList.contains('active')) {
+  if (e.key === 'Tab' && navMenu && navMenu.classList.contains('active')) {
     const firstLink = navMenu.querySelector('a');
     if (firstLink && document.activeElement !== firstLink) {
       firstLink.focus();
