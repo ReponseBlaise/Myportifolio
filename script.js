@@ -7,7 +7,8 @@ body.classList.toggle('dark', savedTheme === 'dark');
 if (modeToggle) {
   const syncThemeButton = () => {
     const isDark = body.classList.contains('dark');
-    modeToggle.textContent = isDark ? '☀️' : '🌙';
+    modeToggle.querySelector('.mode-label').textContent = isDark ? 'Light mode' : 'Dark mode';
+    modeToggle.querySelector('.mode-icon').className = isDark ? 'mode-icon sun-icon' : 'mode-icon moon-icon';
     modeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     modeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
   };
